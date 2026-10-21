@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ziad Alboghdadi, AI engineer and BIM software developer: FirstAI MCP server for Revit, a 45-tool Revit add-in suite, CAD to Revit, sections, families and live project delivery.">
+<meta property="og:title" content="Ziad Alboghdadi · AI Engineer & BIM Software Developer">
+<meta property="og:description" content="FirstAI for Revit, the BIMStudio add-in suite, and delivery on live UAE projects.">
+<meta property="og:image" content="img/me.webp">
+<meta name="theme-color" content="#06080f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%2306080f%27/%3E%3Cpath d=%27M18 20h28L20 44h26%27 stroke=%27%2338d6ff%27 stroke-width=%276%27 fill=%27none%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<title>Ziad Alboghdadi Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark engineering console. One gold accent (the BIMStudio brand gold), graphite surfaces,
+   hairline borders, generous space. Single dark theme by design. */
+:root{
+  --bg:#06080f; --bg-2:rgba(14,19,32,.72); --card:rgba(17,23,38,.66); --card-2:#111827; --line:rgba(120,140,180,.14); --line-2:rgba(130,155,200,.24);
+  --fg:#eef2f8; --fg-2:#a3aec2; --fg-3:#6c7891; --gold:#e8b84a; --gold-2:#ffd987; --gold-glow:rgba(232,184,74,.18);
+  --ai:#4d8dff; --ai-2:#38d6ff; --ai-glow:rgba(56,214,255,.18); --violet:#8b6cff;
+  --grad-gold:linear-gradient(110deg,#ffe3a3 0%,#e8b84a 45%,#c98a1e 100%);
+  --grad-ai:linear-gradient(110deg,#38d6ff 0%,#4d8dff 55%,#8b6cff 100%);
+  --grad-mix:linear-gradient(110deg,#ffd987 0%,#e8b84a 30%,#38d6ff 75%,#4d8dff 100%);
+  --f:"Geist",-apple-system,"Segoe UI",system-ui,sans-serif; --m:"Geist Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:
+  radial-gradient(900px 600px at 8% -5%,rgba(232,184,74,.13),transparent 60%),
+  radial-gradient(900px 700px at 100% 8%,rgba(77,141,255,.16),transparent 60%),
+  radial-gradient(800px 800px at 50% 110%,rgba(139,108,255,.10),transparent 60%),
+  var(--bg);background-attachment:fixed;color:var(--fg);font-family:var(--f);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:0 32px}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(140,160,200,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(140,160,200,.045) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 80%)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+p{margin:0}
+.mono{font-family:var(--m);font-variant-numeric:tabular-nums}
+.label{font-family:var(--m);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.sh .label{background:var(--grad-mix);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.muted{color:var(--fg-2)}
+
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(6,8,15,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:28px;padding-block:14px}
+nav .logo{font-weight:600;letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap}
+nav .logo i{width:10px;height:10px;background:var(--grad-mix);border-radius:3px;box-shadow:0 0 16px rgba(56,214,255,.6)}
+nav .links{display:flex;gap:22px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}
+nav .links a{font-size:.88rem;color:var(--fg-2);text-decoration:none;white-space:nowrap}
+nav .links a:hover{color:var(--fg)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;align-items:center;padding-block:72px 56px}
+.hero > *{min-width:0}
+.avail{display:inline-flex;align-items:center;gap:8px;font-family:var(--m);font-size:.75rem;color:var(--fg-2);border:1px solid var(--line-2);border-radius:99px;padding:5px 12px 5px 10px}
+.avail i{width:7px;height:7px;border-radius:50%;background:var(--ai-2);box-shadow:0 0 10px var(--ai-2)}
+.avail{background:rgba(56,214,255,.05)}
+.hero h1{font-size:clamp(2.7rem,6vw,4.8rem);font-weight:600;letter-spacing:-.035em;margin-top:22px}
+.hero h1 .g{background:var(--grad-mix);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--fg-2);margin-top:22px;max-width:34em}
+.hero .sub b{color:var(--fg);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:.92rem;font-weight:500;text-decoration:none;padding:11px 18px;border-radius:8px;border:1px solid var(--line-2);color:var(--fg);background:var(--card);cursor:pointer;font-family:inherit}
+.btn.p{background:var(--grad-gold);border-color:transparent;color:#1a1306;box-shadow:0 8px 30px -8px rgba(232,184,74,.55)}
+.btn:hover{border-color:var(--fg-3)} .btn.p:hover{filter:brightness(1.08)}
+.stage{position:relative;aspect-ratio:1/1;max-width:100%;border:1px solid transparent;border-radius:18px;background:radial-gradient(120% 90% at 50% 40%,#111a2e 0%,#070a12 72%) padding-box,linear-gradient(150deg,rgba(56,214,255,.55),rgba(130,155,200,.1) 45%,rgba(232,184,74,.5)) border-box;overflow:hidden;box-shadow:0 30px 90px -30px rgba(77,141,255,.45)}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage .hud{position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;font-family:var(--m);font-size:.7rem;color:var(--fg-3)}
+.stage .hud b{color:var(--ai-2);font-weight:500}
+.stage .tl{position:absolute;left:16px;top:14px;font-family:var(--m);font-size:.7rem;color:var(--fg-3);letter-spacing:.08em}
+
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:14px;background:var(--bg-2)}
+.metrics div{padding:22px 24px;border-left:1px solid var(--line)}
+.metrics div:first-child{border-left:0}
+.metrics div:nth-child(1) b,.metrics div:nth-child(2) b{background:var(--grad-ai);-webkit-background-clip:text;background-clip:text}
+.metrics{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 20px 60px -30px rgba(77,141,255,.35)}
+.metrics b{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:600;letter-spacing:-.03em}
+.metrics span{font-size:.84rem;color:var(--fg-2)}
+.clients{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;margin-top:26px;color:var(--fg-3);font-size:.9rem}
+.clients .label{color:var(--fg-3)}
+.clients b{color:var(--fg-2);font-weight:500}
+
+section{padding-top:110px}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.sh h2{font-size:clamp(2rem,4vw,2.9rem);margin-top:12px}
+.sh p{max-width:46ch;color:var(--fg-2)}
+
+.mcp{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px}
+.panel{border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card-2),var(--card-2)) padding-box,linear-gradient(140deg,rgba(77,141,255,.45),rgba(130,155,200,.12) 40%,rgba(232,184,74,.35)) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.04);padding:26px;min-width:0}
+.panel h3{font-size:1.25rem}
+.flow{display:flex;flex-direction:column;margin-top:22px}
+.node{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;position:relative;padding-bottom:20px}
+.node:last-child{padding-bottom:0}
+.node::before{content:"";position:absolute;left:16px;top:34px;bottom:0;width:1px;background:linear-gradient(var(--gold),transparent)}
+.node:last-child::before{display:none}
+.node .ic{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);background:var(--bg-2);display:grid;place-items:center;font-family:var(--m);font-size:.72rem;color:var(--gold)}
+.node.hot .ic{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-glow)}
+.node.ai .ic{border-color:var(--ai-2);color:var(--ai-2);box-shadow:0 0 0 4px var(--ai-glow),0 0 18px rgba(56,214,255,.35)}
+.node.ai::before{background:linear-gradient(var(--ai-2),transparent)}
+.node b{font-weight:500}
+.node small{display:block;font-family:var(--m);font-size:.75rem;color:var(--fg-3);margin-top:2px}
+.safe{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.safe div{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.93rem;color:var(--fg-2)}
+.safe div::before{content:"";width:16px;height:16px;margin-top:4px;border-radius:50%;border:1.5px solid var(--gold);background:radial-gradient(var(--gold) 0 3px,transparent 4px)}
+.safe b{color:var(--fg);font-weight:500}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:22px}
+.kpis div{background:var(--bg-2);padding:14px 16px}
+.kpis b{display:block;font-size:1.4rem;font-weight:600;letter-spacing:-.02em}
+.kpis span{font-size:.75rem;color:var(--fg-3)}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.tools span{font-family:var(--m);font-size:.72rem;color:var(--fg-2);border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:var(--bg-2)}
+.tools span.w{color:var(--ai-2);border-color:rgba(56,214,255,.4);background:rgba(56,214,255,.06)}
+.shotframe{border-radius:10px;overflow:hidden;border:1px solid var(--line-2);margin-top:18px;background:#fff;cursor:zoom-in}
+.shotframe{max-width:380px}
+.shotframe img{display:block;width:100%;height:auto!important;object-fit:contain}
+
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line);margin-bottom:30px}
+.tabs button{font-family:inherit;font-size:.92rem;background:none;border:0;color:var(--fg-3);padding:12px 14px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--ai-2);box-shadow:0 10px 18px -14px rgba(56,214,255,.9)}
+.tabs button:hover{color:var(--fg)}
+.case{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:start;min-height:420px}
+.case > *{min-width:0}
+.case .client{font-family:var(--m);font-size:.78rem;color:var(--fg-3)}
+.case h3{font-size:clamp(1.6rem,2.6vw,2.1rem);margin:10px 0 14px}
+.case p.d{color:var(--fg-2)}
+.case ul{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
+.case li{display:grid;grid-template-columns:5.2em 1fr;gap:16px;font-size:.93rem;color:var(--fg-2);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.case li b{font-family:var(--m);color:var(--gold);font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.gallery{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.gallery .big{grid-column:1/-1;aspect-ratio:16/10}
+.gallery .sm{aspect-ratio:4/3}
+.gallery .sm:only-of-type,.gallery .sm:last-child:nth-child(2){grid-column:1/-1;aspect-ratio:16/7}
+.ph{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;cursor:zoom-in;position:relative;margin:0}
+.ph img{display:block;width:100%;height:100%;object-fit:cover}
+.ph figcaption{position:absolute;left:8px;bottom:8px;font-size:.72rem;background:rgba(10,12,16,.85);color:var(--fg);padding:3px 8px;border-radius:6px}
+.bigstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bigstats div{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:26px}
+.bigstats b{display:block;font-size:2.6rem;font-weight:600;letter-spacing:-.03em;color:var(--gold)}
+.bigstats span{color:var(--fg-2);font-size:.9rem}
+
+.proc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:34px}
+.proc div{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:16px;min-width:0;position:relative}
+.proc div b{display:block;font-weight:500;margin-top:8px}
+.proc div span{font-size:.82rem;color:var(--fg-2)}
+.proc div i{font-style:normal;font-family:var(--m);font-size:.7rem;color:var(--gold)}
+.rail{border:1px solid var(--line);border-radius:14px;background:var(--bg-2);padding:26px 22px 24px;margin-bottom:40px}
+.rail ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:30px 0}
+.rail li{position:relative;padding:30px 14px 0 0;min-width:0}
+.rail li::after{content:"";position:absolute;left:0;right:0;top:15px;height:1px;background:var(--line-2)}
+.rail li.k::after{background:linear-gradient(90deg,var(--ai-2),var(--line-2))}
+.rail li::before{content:"";position:absolute;top:10px;left:0;width:11px;height:11px;border-radius:50%;background:var(--bg-2);border:2px solid var(--gold);z-index:1}
+@media (max-width:900px){.rail ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.rail li.k::before{background:var(--ai-2);border-color:var(--ai-2);box-shadow:0 0 14px var(--ai-2)}
+.rail .dt{position:absolute;top:0;left:0;font-family:var(--m);font-size:.72rem;color:var(--fg-3)}
+.rail b{display:block;font-weight:500;font-size:.9rem;line-height:1.3}
+.rail span{display:block;font-size:.78rem;color:var(--fg-2);margin-top:4px}
+.railhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.railhead h3{font-size:1.2rem}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 14px}
+.bdg{font-size:.8rem;border:1px solid var(--line-2);border-radius:8px;padding:6px 10px;background:var(--bg-2);color:var(--fg-2);min-width:0}
+.bdg em{font-style:normal;font-family:var(--m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);display:block}
+.bdg.fast{border-color:rgba(56,214,255,.45);background:linear-gradient(120deg,rgba(56,214,255,.10),rgba(77,141,255,.04))}
+.bdg.fast strong{color:var(--ai-2);font-weight:500}
+@media (max-width:900px){.proc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.alog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:46px}
+.alog > *{min-width:0}
+.lg{border:1px solid var(--line);border-radius:14px;background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow:hidden}
+.lg header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);background:linear-gradient(120deg,rgba(77,141,255,.08),transparent 60%)}
+.lg header h4{font-size:1.05rem;font-weight:600}
+.lg header span{font-family:var(--m);font-size:.7rem;color:var(--fg-3);white-space:nowrap}
+.lg ol{list-style:none;margin:0;padding:6px 0}
+.lg li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;padding:9px 18px;border-bottom:1px solid rgba(120,140,180,.07)}
+.lg li:last-child{border-bottom:0}
+.lg li b{font-weight:500;font-size:.9rem}
+.lg li em{font-style:normal;font-family:var(--m);font-size:.78rem;color:var(--ai-2);text-align:right;white-space:nowrap;align-self:start;padding-top:2px}
+.lg li p{grid-column:1/-1;font-size:.82rem;color:var(--fg-2)}
+.lg li.cp b::before{content:"COPING";font-family:var(--m);font-size:.6rem;letter-spacing:.1em;color:#1a1306;background:var(--grad-gold);border-radius:3px;padding:1px 5px;margin-right:7px;vertical-align:2px}
+.alhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-top:70px}
+.alhead h3{font-size:clamp(1.5rem,2.6vw,2rem)}
+.alhead p{color:var(--fg-2);max-width:52ch;font-size:.95rem}
+.altot{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--m);font-size:.8rem;color:var(--fg-3)}
+.altot b{display:block;font-size:1.5rem;font-family:var(--f);font-weight:600;background:var(--grad-ai);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (max-width:900px){.alog{grid-template-columns:minmax(0,1fr)}}
+.cad{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:stretch}
+.cad > *{min-width:0}
+.steps{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;counter-reset:st}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:.92rem;color:var(--fg-2);counter-increment:st}
+.steps li::before{content:counter(st,decimal-leading-zero);font-family:var(--m);font-size:.72rem;color:var(--ai-2);border:1px solid rgba(56,214,255,.4);border-radius:7px;display:grid;place-items:center;height:26px}
+.steps b{color:var(--fg);font-weight:500}
+.cadcmp{border-radius:14px;overflow:hidden;border:1px solid var(--line-2);cursor:zoom-in;background:#0a0c12;margin:0}
+.cadcmp img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+.uses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.uses div{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:18px;min-width:0}
+.uses b{display:block;font-size:1.6rem;font-weight:600;letter-spacing:-.02em;background:var(--grad-ai);-webkit-background-clip:text;background-clip:text;color:transparent}
+.uses h4{font-size:.98rem;font-weight:500;margin-top:6px}
+.uses p{font-size:.84rem;color:var(--fg-2);margin-top:6px}
+@media (max-width:900px){.cad,.uses{grid-template-columns:minmax(0,1fr)}}
+.dp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dp > *{min-width:0}
+.dc{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.dc .ph{border:0;border-radius:0;border-bottom:1px solid var(--line);aspect-ratio:4/3}
+.dc .ph img{object-position:center top}
+.dc .b{padding:20px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.dc .big{font-size:2rem;font-weight:600;letter-spacing:-.03em;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.dc h3{font-size:1.25rem}
+.dc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.dc li{font-size:.88rem;color:var(--fg-2);display:grid;grid-template-columns:12px 1fr;gap:8px}
+.dc li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ai-2);margin-top:8px;box-shadow:0 0 8px var(--ai-2)}
+.dc li b{color:var(--fg);font-weight:500}
+.dtools{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.dtools span{font-family:var(--m);font-size:.68rem;color:var(--fg-3);border:1px solid var(--line);border-radius:5px;padding:2px 7px}
+@media (max-width:900px){.dp{grid-template-columns:minmax(0,1fr)}}
+.fam{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.fam > *{min-width:0}
+.fc{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:22px;display:flex;flex-direction:column;gap:12px}
+.fc .tag{align-self:flex-start;font-family:var(--m);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid rgba(56,214,255,.4);color:var(--ai-2);background:rgba(56,214,255,.06)}
+.fc h3{font-size:1.25rem}
+.fc p{font-size:.9rem;color:var(--fg-2)}
+.fc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.fc li{font-size:.86rem;color:var(--fg-2);display:grid;grid-template-columns:12px 1fr;gap:8px}
+.fc li::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--gold);margin-top:8px}
+.fc li b{color:var(--fg);font-weight:500}
+.fc .shot{margin-top:auto;border-radius:10px;overflow:hidden;border:1px solid var(--line-2);background:#1b2130;cursor:zoom-in;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center}
+.fc .shot img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.flow2{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--m);font-size:.74rem;color:var(--fg-2)}
+.flow2 span{border:1px solid var(--line-2);border-radius:6px;padding:4px 8px;background:var(--bg-2)}
+.flow2 i{font-style:normal;color:var(--ai-2)}
+@media (max-width:900px){.fam{grid-template-columns:minmax(0,1fr)}}
+.fthead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:34px 0 14px;flex-wrap:wrap}
+.fthead h3{font-size:1.35rem}
+.fthead .mono{font-size:.74rem}
+.ftgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ftgrid .ac{border-color:transparent;background:linear-gradient(var(--card-2),var(--card-2)) padding-box,linear-gradient(140deg,rgba(56,214,255,.5),rgba(130,155,200,.12) 45%,rgba(232,184,74,.45)) border-box}
+.ftgrid .ac .im{aspect-ratio:16/10;padding:14px}
+.ftgrid .ac .t h4{font-size:1.15rem}
+
+.ftgrid .ac .t span::after{content:"  ·  FLAGSHIP";color:var(--gold)}
+.ftgrid .ac .im.none img{width:72px;height:72px}
+@media (max-width:900px){.ftgrid{grid-template-columns:minmax(0,1fr)}}
+.ribbon{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#3b4453}
+.ribbon .scroll{overflow-x:auto}
+.ribbon img{display:block;height:80px;width:auto;max-width:none}
+.ribbon .panels{border-top:1px solid rgba(255,255,255,.08)}
+.ribbon .panels img{height:86px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 20px}
+.filters button{font-family:inherit;font-size:.84rem;background:var(--card);color:var(--fg-2);border:1px solid var(--line);padding:7px 13px;border-radius:99px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--grad-ai);color:#04101c;border-color:transparent;font-weight:500}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.ac{border:1px solid var(--line);border-radius:12px;background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:0;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.ac:hover{border-color:rgba(56,214,255,.55);box-shadow:0 18px 40px -20px rgba(56,214,255,.45)}
+.ac .im{aspect-ratio:16/10;background:#1b2130;overflow:hidden;width:100%}
+.ac .im{display:flex;align-items:center;justify-content:center;padding:10px}
+.ac .im img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:4px}
+.ac .im.none{flex-direction:column;gap:10px}
+.ac .im.none img{width:52px;height:52px;image-rendering:auto;border-radius:10px}
+.ac .im.none{display:flex;align-items:center;justify-content:center;font-family:var(--m);font-size:.72rem;color:var(--fg-3);padding:14px;text-align:center}
+.ac .t{padding:14px 16px 16px}
+.ac .t span{font-family:var(--m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+.ac .t h4{font-size:1.02rem;font-weight:500;margin-top:5px}
+.ac .t p{font-size:.86rem;color:var(--fg-2);margin-top:5px}
+.chp{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.chp i{font-style:normal;font-family:var(--m);font-size:.66rem;color:var(--ai-2);border:1px solid rgba(56,214,255,.28);background:rgba(56,214,255,.05);border-radius:5px;padding:2px 6px}
+
+.more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.mi{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--bg-2);min-width:0}
+.mi h4{font-size:1rem;font-weight:500}
+.mi p{font-size:.86rem;color:var(--fg-2);margin-top:8px}
+
+.plat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pc{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;min-width:0}
+.pc .ph{border:0;border-radius:0;border-bottom:1px solid var(--line);aspect-ratio:16/9}
+.pc .ph img{object-position:top left}
+.pc .b{padding:20px 22px 22px}
+.pc h3{font-size:1.15rem}
+.pc p{font-size:.9rem;color:var(--fg-2);margin-top:8px}
+.pc .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.pc .chips span{font-family:var(--m);font-size:.7rem;color:var(--fg-3);border:1px solid var(--line);padding:2px 8px;border-radius:5px}
+.pc.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+.pc.wide .ph{border-bottom:0;border-right:1px solid var(--line);aspect-ratio:auto;min-height:300px}
+
+.rlist{border-top:1px solid var(--line)}
+.ri{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) minmax(0,.5fr);gap:24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.ri h4{font-size:1.05rem;font-weight:500}
+.ri p{font-size:.9rem;color:var(--fg-2)}
+.ri span{font-family:var(--m);font-size:.72rem;color:var(--fg-3);text-align:right}
+
+.contact{margin-top:110px;border:1px solid var(--line);border-radius:18px;padding:clamp(28px,5vw,56px);background:radial-gradient(70% 120% at 100% 0%,rgba(77,141,255,.22),transparent 60%),radial-gradient(60% 100% at 0% 100%,rgba(232,184,74,.14),transparent 60%),var(--card-2);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:36px}
+.contact > *{min-width:0}
+.contact h2{font-size:clamp(2rem,4vw,3rem)}
+.cl{display:flex;flex-direction:column}
+.cl div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.93rem;flex-wrap:wrap}
+.cl div > span:first-child{color:var(--fg-3);font-family:var(--m);font-size:.78rem}
+.cl a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--ai-2)}
+.copy{font-family:var(--m);font-size:.7rem;background:var(--bg-2);border:1px solid var(--line-2);color:var(--fg-2);border-radius:5px;padding:1px 7px;margin-left:8px;cursor:pointer}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--fg-3);font-size:.8rem;margin-top:28px;font-family:var(--m)}
+
+#modal{position:fixed;inset:0;z-index:60;background:rgba(5,6,9,.88);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+#modal[hidden]{display:none}
+#modal .box{background:var(--card);border:1px solid var(--line-2);border-radius:16px;max-width:1120px;width:100%;max-height:100%;overflow:auto;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+#modal .box.img{grid-template-columns:minmax(0,1fr)}
+#modal .mimg{background:#1b2130;display:flex;align-items:center;justify-content:center;padding:14px;min-height:240px}
+#modal .mimg img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:6px;background:#fff}
+#modal .mtx{padding:28px;display:flex;flex-direction:column;gap:12px}
+#modal .mtx h3{font-size:1.6rem}
+#modal .mtx p{color:var(--fg-2)}
+#modal .x{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px));z-index:61}
+
+@media (prefers-reduced-motion:no-preference){
+  .rv{transition:opacity .7s ease,transform .7s ease}
+  .rv.pre{opacity:.001;transform:translateY(18px)}
+  .ac:hover{transform:translateY(-2px)}
+}
+@media (max-width:900px){
+  .hero,.mcp,.case,.contact,.pc.wide{grid-template-columns:minmax(0,1fr)}
+  .hero{padding-top:40px}
+  .stage{aspect-ratio:4/3}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metrics div:nth-child(3){border-left:0}
+  .metrics div:nth-child(n+3){border-top:1px solid var(--line)}
+  .more,.plat{grid-template-columns:minmax(0,1fr)}
+  .pc.wide .ph{border-right:0;border-bottom:1px solid var(--line);min-height:200px}
+  .ri{grid-template-columns:minmax(0,1fr);gap:6px}
+  .ri span{text-align:left}
+  #modal .box{grid-template-columns:minmax(0,1fr)}
+  nav .links{gap:16px}
+  section{padding-top:80px}
+}
+@media (max-width:520px){ .gallery,.bigstats{grid-template-columns:minmax(0,1fr)} .kpis{grid-template-columns:repeat(2,minmax(0,1fr))} .case li{grid-template-columns:4.4em 1fr} }
+
+/* ---- photo in hero ---- */
+.stage.withme canvas{opacity:.85}
+.stage .me{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:94%;width:auto;max-width:none;z-index:2;
+  filter:drop-shadow(0 0 1.5px rgba(150,225,255,.55)) drop-shadow(0 0 22px rgba(56,214,255,.22)) drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+.stage.withme::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;z-index:3;background:linear-gradient(transparent,rgba(6,8,15,.92));pointer-events:none}
+.stage .mename{position:absolute;left:18px;bottom:40px;z-index:4;display:flex;flex-direction:column}
+.stage .mename b{font-size:1.2rem;font-weight:600}
+.stage .mename span{font-family:var(--m);font-size:.7rem;color:var(--ai-2);margin-top:2px}
+.stage .hud,.stage .tl{z-index:4}
+/* ---- interactive site chrome ---- */
+.progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:2px;width:0;z-index:50;background:var(--grad-mix);box-shadow:0 0 10px rgba(56,214,255,.6)}
+nav .links a{position:relative;transition:color .2s}
+nav .links a.on{color:var(--fg)}
+nav .links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:var(--grad-mix)}
+nav .menu{display:none;margin-left:auto;font-family:var(--m);font-size:.78rem;background:var(--card);color:var(--fg);border:1px solid var(--line-2);border-radius:8px;padding:7px 12px;cursor:pointer}
+@media (max-width:820px){
+  nav .menu{display:inline-flex}
+  nav .wrap{flex-wrap:wrap}
+  nav .links{display:none;width:100%;flex-direction:column;gap:0;margin:6px 0 4px;margin-left:0}
+  nav .links.open{display:flex}
+  nav .links a{padding:11px 4px;border-top:1px solid var(--line)}
+  nav .links a.on::after{display:none}
+}
+.totop{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  text-decoration:none;color:#04101c;font-weight:700;background:var(--grad-ai);box-shadow:0 12px 30px -10px rgba(56,214,255,.7);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.mnav{position:fixed;top:50%;transform:translateY(-50%);z-index:62;width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);background:rgba(14,19,32,.85);color:var(--fg);font-size:1.6rem;line-height:1;cursor:pointer}
+.mnav.prev{left:calc(14px + env(safe-area-inset-left,0px))}.mnav.next{right:calc(14px + env(safe-area-inset-right,0px))}
+.mnav:hover{border-color:var(--ai-2);color:var(--ai-2)}
+.mnav[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){
+  .ac,.wc,.panel,.dc,.fc,.pc,.lg{transition:transform .25s,box-shadow .25s,border-color .25s}
+  .dc:hover,.fc:hover,.pc:hover,.lg:hover{transform:translateY(-3px);box-shadow:0 22px 50px -26px rgba(56,214,255,.45)}
+}
+
+.cad{grid-template-columns:minmax(0,1fr)!important}
+.pc.wide{grid-template-columns:minmax(0,1fr)!important}
+.dc .b{padding-top:24px}
+</style>
+</head>
+<body>
+
+
+<div class="progress" id="progress"></div>
+<nav><div class="wrap">
+  <a class="logo" href="#top"><i></i>Ziad Alboghdadi</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="links">Menu</button>
+  <div class="links" id="links"><a href="#mcp">FirstAI</a><a href="#cad">CAD → Revit</a><a href="#drawings">Sections &amp; dims</a><a href="#families">Families</a><a href="#work">Delivery</a><a href="#addins">BIMStudio</a><a href="#platforms">Platforms</a><a href="#research">AI R&amp;D</a><a href="#contact">Contact</a></div>
+</div></nav>
+
+<div class="wrap" id="top">
+
+<header class="hero">
+  <div>
+    <span class="avail"><i></i>AI Engineer · BIM Software Developer</span>
+    <h1>From task to issued drawing <span class="g">in days, not weeks.</span></h1>
+    <p class="sub">I'm <b>Ziad Alboghdadi</b>, an AI engineer at First Engineering Services. I take a consultant comment, an RFI or an email, own it end to end, and ship the model, the sheets and the report. I convert AutoCAD into native Revit, and I produce the drawings themselves: sections, dimensions, tags and sheets ready to issue, plus parametric and nested Revit families. My own tools make that fast: <b>FirstAI</b>, an MCP server that lets AI edit live Revit models safely, and <b>BIMStudio</b>, a 45-tool Revit add-in suite.</p>
+    <div class="cta"><a class="btn p" href="#mcp">See the work</a><a class="btn" href="#contact">Get in touch</a></div>
+  </div>
+  <div class="stage withme" aria-label="Ziad Alboghdadi in front of an animated wireframe of a building being scanned">
+    <canvas id="bim"></canvas>
+    <img class="me" src="img/me.webp" alt="Ziad Alboghdadi" width="960" height="1200">
+    <div class="mename"><b>Ziad Alboghdadi</b><span>AI Engineer · BIM Software Developer</span></div>
+    <div class="tl">LIVE MODEL · LEVEL CHECK</div>
+    <div class="hud"><span>scanning <b id="lvl">L00</b></span><span><b id="cnt">0</b> elements checked</span></div>
+  </div>
+</header>
+
+<div class="metrics rv">
+  <div><b class="mono" data-count="31">31</b><span>MCP tools on 74 Revit commands</span></div>
+  <div><b class="mono" data-count="2000" data-suffix="+">2,000+</b><span>model edits shipped through AI</span></div>
+  <div><b class="mono" data-count="87" data-suffix="k">87k</b><span>lines of C# in BIMStudio</span></div>
+  <div><b class="mono" data-count="12">12</b><span>deliveries in 16 days</span></div>
+</div>
+<div class="clients"><span class="label">Projects</span><b>The Wilds · Aldar</b><b>Palm Jebel Ali · Dubai Holding</b><b>CityWalk Verve 4 · DHRE</b><b>Bluewaters · Meraas</b></div>
+
+<section id="mcp">
+  <div class="sh rv"><div><div class="label">01 · Flagship</div><h2>FirstAI: AI that works inside Revit</h2></div><p>An engineer describes the task. The agent reads the model and the project standards, prepares the change, and applies it only after a confirmation in Revit. I designed and built both halves.</p></div>
+  <div class="mcp rv">
+    <div class="panel">
+      <div class="label" style="color:var(--fg-3)">Architecture</div>
+      <div class="flow">
+        <div class="node"><div class="ic">01</div><div><b>Engineer's request</b><small>Arabic or English, in plain words</small></div></div>
+        <div class="node ai"><div class="ic">PY</div><div><b>FirstAI MCP server</b><small>Python 3.13 · FastMCP · 31 tools · guard layer · knowledge base</small></div></div>
+        <div class="node"><div class="ic">JB</div><div><b>Detached job worker</b><small>locking · recovery from unknown outcomes · paged results</small></div></div>
+        <div class="node hot"><div class="ic">C#</div><div><b>FirstAI Revit add-in</b><small>token-secured localhost bridge · ExternalEvent · 74 commands</small></div></div>
+        <div class="node"><div class="ic">DL</div><div><b>Hot-reload logic library</b><small>9,806 lines · rebuilt without restarting Revit</small></div></div>
+      </div>
+      <div class="kpis">
+        <div><b class="mono">1,832</b><span>lines of Python</span></div>
+        <div><b class="mono">10.6k</b><span>lines of C#</span></div>
+        <div><b class="mono">133</b><span>tests passing</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Built for production models</h3>
+      <div class="safe">
+        <div><span><b>Two-step writes.</b> A dry run with a model snapshot and a cited source, then a single-use execute that refuses if the model changed.</span></div>
+        <div><span><b>The engineer stays in control.</b> Every change asks for confirmation in Revit and is one Undo. Deletes need an exact element list.</span></div>
+        <div><span><b>Risk-classed commands.</b> Read, UI, export, write, destructive and blocked. Unknown commands never reach Revit.</span></div>
+        <div><span><b>Full audit trail.</b> Every attempt is logged, with a reminder to Save &amp; Sync.</span></div>
+      </div>
+      <div class="tools">
+        <span>revit_query</span><span>revit_element</span><span>revit_find_mark</span><span>revit_dims_info</span><span>revit_view_extents</span><span class="w">revit_prepare</span><span class="w">revit_execute</span><span>project_context</span><span>knowledge_search</span><span>extract_comments</span><span>compare_revisions</span><span>+20 more</span>
+      </div>
+      <div class="shotframe ph" data-src="img/ui_firstai_bridge.webp" data-cap="FirstAI Bridge running inside Revit 2026"><img src="img/ui_firstai_bridge.webp" alt="FirstAI Bridge dialog in Revit" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section id="cad">
+  <div class="sh rv"><div><div class="label">02 · Conversion</div><h2>AutoCAD → native Revit</h2></div><p>Consultant and IFC details arrive as DWG. I rebuild them as real Revit content (lines, filled regions, text and live dimensions) in the project's own standards and title block. They are never linked or exploded CAD.</p></div>
+  <div class="cad rv">
+    <div class="panel">
+      <h3>My conversion pipeline</h3>
+      <ol class="steps">
+        <li><span><b>DWG → DXF</b> through the AutoCAD core console, batch and headless.</span></li>
+        <li><span><b>Split by viewport:</b> each detail is extracted with its title, scale and notes.</span></li>
+        <li><span><b>Map to the model's standards:</b> layers to line styles, lineweights, greys, line patterns, text styles and dimension types.</span></li>
+        <li><span><b>Rebuild natively:</b> detail lines, filled regions, text with the original alignment and fonts, and real dimensions with the original rounding.</span></li>
+        <li><span><b>Dry run and image check</b> against the source PDF before anything is committed.</span></li>
+        <li><span><b>Sheet in team format:</b> title block, revision, viewport titles, issued as PDF.</span></li>
+      </ol>
+    </div>
+    
+  </div>
+  <div class="uses rv">
+    <div><b>11 details · 1 day</b><h4>Palm Jebel Ali · Villa O</h4><p>IFC wall and base details converted to native drafting views, then placed on a team-format sheet and emailed the same day.</p></div>
+    <div><b>18 details · 3 sheets</b><h4>The Wilds · ceiling shop drawing</h4><p>SD-FC details rebuilt from DXF with text alignment, fonts and hatches preserved, then upgraded to real model sections.</p></div>
+    <div><b>107 plots · ±0.1 m</b><h4>The Wilds · Cassia 4 master plan</h4><p>The master-plan DXF was georeferenced to the Revit model on 107 gates, so every wall and level could be checked against it.</p></div>
+  </div>
+  
+</section>
+
+<section id="drawings">
+  <div class="sh rv"><div><div class="label">03 · Drawing production</div><h2>Sections, dimensions, sheets</h2></div><p>The drawings that get issued, not only the model. Every section is cut from the model, and every dimension references real geometry, so it updates when the design changes.</p></div>
+  <div class="dp rv">
+    <article class="dc">
+      <div class="b"><div class="big">23 sections</div><h3>Sections from the model</h3>
+      <ul>
+        <li><span><b>Typical sections A-A to F-F</b> on Cassia 1 and 2, cut on the right villa, with levels, tags and dims from the model</span></li>
+        <li><span><b>11 ceiling sections</b> (SD-FC A–K, 1:5), with the shop-drawing detail fitted onto the real model cut</span></li>
+        <li><span><b>1,124 section reference marks</b> placed across 215 plans, kept clear of dimensions</span></li>
+        <li><span>Door, curtain-wall and wet-area sections and elevations generated by my add-ins</span></li>
+      </ul>
+      <div class="dtools"><span>section_cut</span><span>reference_sections</span><span>Door &amp; CW Sections</span><span>Room &amp; Tiling</span></div></div></article>
+    <article class="dc">
+      <div class="b"><div class="big">Live dims</div><h3>Dimensions on geometry</h3>
+      <ul>
+        <li><span><b>66 RCP dimensions</b> made from model faces; the 14 points where the model is 10–42 mm off the SD were reported</span></li>
+        <li><span><b>Tile setting-out chains</b>, grid-to-drain dims and spot levels on the Villa P floor-finish sheet</span></li>
+        <li><span><b>CAD details rebuilt with real dimensions</b>, keeping the source rounding and text height</span></li>
+        <li><span>Automatic column, footing, PC-slab and exterior plan dimensions (BIMStudio)</span></li>
+        <li><span>Small-segment text flipped and crowded chains simplified for a clean print</span></li>
+      </ul>
+      <div class="dtools"><span>revit_dims_info</span><span>Column / Plan Dims</span><span>PC Slab</span><span>dim_small_flip</span></div></div></article>
+    <article class="dc">
+      <div class="b"><div class="big">Issue-ready</div><h3>Annotation &amp; sheets</h3>
+      <ul>
+        <li><span><b>Tags, legends and schedules</b>: RCP tags, room and type-mark tags, FFL spots, setting-out points, fall arrows</span></li>
+        <li><span><b>Sheets in the team format</b>: title block data, revisions, viewport titles, then PDF</span></li>
+        <li><span><b>Whole sheet sets updated in one pass</b>: renumbering, retitling, a legend cloud on 136 sheets</span></li>
+        <li><span>Tag All and Align Tags tools for clean, aligned annotation</span></li>
+      </ul>
+      <div class="dtools"><span>anno_build</span><span>sd_sheets</span><span>Tag All</span><span>Align Tags</span><span>Sheet Exporter</span></div></div></article>
+  </div>
+</section>
+
+<section id="families">
+  <div class="sh rv"><div><div class="label">04 · Families</div><h2>Revit families: built, generated, nested</h2></div><p>I work inside the Family Editor and I also write code that builds families: reference planes, locked and equal dimensions, formulas, type catalogues, voids, materials and nested components.</p></div>
+  <div class="fam rv">
+    <article class="fc"><span class="tag">Family generation</span><h3>From a spec to a real .rfa</h3>
+      <p>Engineers draft a family in the company ERP (parameters, types, materials, solids). My Revit add-in builds it as a real family and uploads it back to the shared library.</p>
+      <div class="flow2"><span>ERP spec</span><i>→</i><span>params · types · formulas</span><i>→</i><span>solids · voids · materials</span><i>→</i><span>.rfa</span></div>
+      <ul>
+        <li><span><b>Every parameter and type</b>, in the right groups, with formulas; a formula Revit refuses becomes a per-type value and is reported</span></li>
+        <li><span><b>Extrusions and revolutions</b> tied to parameters, yes/no visibility, and voids that cut</span></li>
+        <li><span><b>One codebase for Revit 2022–2026</b>, with a formula engine cross-tested against the web version</span></li>
+      </ul>
+      <figure class="shot ph" data-src="img/ui_family_studio.webp" data-cap="FES Family Studio: build families from the ERP library inside Revit"><img src="img/ui_family_studio.webp" alt="Family Studio sign-in inside Revit" loading="lazy"></figure></article>
+    <article class="fc"><span class="tag">Parametric by code</span><h3>Opening families that flex</h3>
+      <p>BWIC Openings creates its own families from the Generic Model template: wall and floor openings, rectangular and round.</p>
+      <ul>
+        <li><span><b>Reference planes, aligned and locked dims, EQ constraints</b>, and labelled width, height, diameter and depth</span></li>
+        <li><span><b>A void that cuts the host</b> plus a matching visible solid on its own subcategory, switchable per instance</span></li>
+        <li><span><b>Flex-tested before saving</b>; if Revit refuses a parametric profile, it falls back to fixed sizes automatically</span></li>
+        <li><span>Cached per Revit version and loaded straight into the project</span></li>
+      </ul>
+      <figure class="shot ph" data-src="img/ui_bwic_openings.webp" data-cap="BWIC Openings: generates, sizes and places its own parametric opening families"><img src="img/ui_bwic_openings.webp" alt="BWIC Openings dialog" loading="lazy"></figure></article>
+    <article class="fc"><span class="tag">Nested &amp; editing</span><h3>Nested and shared families</h3>
+      <p>I build families from components: nested and shared families with their parameters passed up to the host, so one family drives many parts.</p>
+      <ul>
+        <li><span><b>Nested and shared components</b> with linked parameters, visibility and type control</span></li>
+        <li><span><b>Opens loaded families from the project</b> and reads every parameter, formula, subcategory and visibility setting</span></li>
+        <li><span><b>Works with nested parts in the model</b>: vanity heights measured through their nested families, drains placed on their nested reference planes</span></li>
+        <li><span><b>Places families in bulk</b>: 89 shadow-gap families, stiffener columns, opening families</span></li>
+      </ul>
+      <figure class="shot" style="cursor:default;background:#3b4453"><img src="img/family_panel.png" alt="Family Studio panel on the First Engineering ribbon" loading="lazy" style="width:62%;height:auto;image-rendering:auto"></figure></article>
+  </div>
+</section>
+
+<section id="work">
+  <div class="sh rv"><div><div class="label">05 · Delivery</div><h2>I take the task. I ship it.</h2></div><p>Every item below started as a real request: a consultant comment, an RFI, an IFC sheet or an email. Each one was delivered, and every number comes from my work log.</p></div>
+  <div class="proc rv">
+    <div><i>01</i><b>Take the brief</b><span>Comment, RFI, email or IFC sheet. I read the source and confirm the scope.</span></div>
+    <div><i>02</i><b>Read the model</b><span>Query the live model and project standards; list every element affected.</span></div>
+    <div><i>03</i><b>Plan &amp; dry run</b><span>Each change is tied to its source and tested before anything is written.</span></div>
+    <div><i>04</i><b>Apply &amp; verify</b><span>Confirmed in Revit, checked against the source, Save &amp; Sync.</span></div>
+    <div><i>05</i><b>Issue</b><span>Sheets, PDFs, a change register and the reply email.</span></div>
+  </div>
+  <div class="rail rv">
+    <div class="railhead"><h3>Recent deliveries</h3><span class="mono muted" style="font-size:.78rem">12 deliveries · 4 projects</span></div>
+    <ol>
+      <li><b>Villa K review</b><span>2,589 markups → registers; 107-comment resubmission check</span></li>
+      <li><b>Cassia 2 comments</b><span>213 beams split, 538 section marks</span></li>
+      <li><b>Bluewaters clash scans</b><span>Full federated scan, new fix rules</span></li>
+      <li><b>Cassia 2 levels</b><span>144 TB1 beams raised to section E-E</span></li>
+      <li class="k"><b>Ceiling RCP + SD-FC sheets</b><span>24 ceilings, 18 details, 3 sheets by the next day</span></li>
+      <li class="k"><b>FirstAI MCP built</b><span>Spec → plan → 31 tools → deployed, in one evening</span></li>
+      <li class="k"><b>Cassia 1 joints</b><span>440 cuts, 586 marks, 136 sheets in a day</span></li>
+      <li><b>ClashFix v1.0</b><span>Floor, ceiling and shadow-gap fix rules released</span></li>
+      <li><b>Cassia 4 review</b><span>107 villas studied and reviewed in a day</span></li>
+      <li><b>Villa O CAD → Revit</b><span>11 native details + sheet, same day</span></li>
+      <li><b>4BR stair, 3 models</b><span>386 offsets, 6 PDFs issued</span></li>
+      <li><b>Villa P tiling + ClashFix v1.1</b><span>Sheet issued at rev 00</span></li>
+    </ol>
+  </div>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div id="case" class="case" role="tabpanel"></div>
+  <div class="alhead rv"><div><div class="label" style="color:var(--fg-3)">Automation log</div><h3 style="margin-top:10px">Everything I automated, task by task</h3></div>
+    <div class="altot"><span><b>65+</b>tasks automated</span><span><b>9,000+</b>elements, sheets &amp; markups processed</span><span><b>6</b>projects</span></div></div>
+  <div class="alog rv" id="alog"></div>
+</section>
+
+<section id="addins">
+  <div class="sh rv"><div><div class="label">06 · Revit add-ins</div><h2>BIMStudio suite</h2></div><p>45 commands on the company's own Revit tab, used by the BIM team. C# on .NET 8, with a signed, machine-bound licence. Every screenshot is from Revit 2026.</p></div>
+  <div class="ribbon rv"><div class="scroll"><img src="img/ribbon.webp" alt="First Engineering ribbon tab in Revit 2026" width="1864" height="94"></div><div class="scroll panels"><img src="img/ribbon_panels.webp" alt="Expanded panels: MEP Coordination, Asset Data, Wall Tools, Floor Tools, Room and Tiling, Family Studio" width="960" height="127"></div></div>
+  <div class="fthead"><h3>Flagship tools</h3><span class="mono muted">click any tool for details</span></div>
+  <div class="ftgrid" id="ftgrid"></div>
+  <div class="fthead" style="margin-top:40px"><h3>All tools</h3></div>
+  <div class="filters" id="filters" role="group" aria-label="Filter tools"></div>
+  <div class="agrid" id="agrid"></div>
+  <div class="more">
+    <div class="mi"><h4>Navisworks Clash plug-in</h4><p>Exports clash registers in FES or DHRE style, plus Switch Back, which jumps from a clash straight to a section box in Revit.</p></div>
+    <div class="mi"><h4>FE.ClashFix (Revit 2024)</h4><p>Parsed 10,197 Navisworks clashes on Bluewaters Tower 1 and resolved about 5,000 of them with 7 fix rules.</p></div>
+  </div>
+</section>
+
+<section id="platforms">
+  <div class="sh rv"><div><div class="label">07 · Platforms</div><h2>Software the company runs on</h2></div><p>The ERP, client portal, weekly BIM dashboards and a browser-based 3D clash viewer.</p></div>
+  <div class="plat rv">
+    <article class="pc wide">
+      <div class="b"><div class="label">first-es.com</div><h3 style="margin-top:10px;font-size:1.5rem">FES Platform: ERP, portal and website</h3><p>One Node/Express server running the public site, the ERP, a client portal and an admin panel on PostgreSQL. Tasks by building, level and discipline with deadlines from estimated hours, review and rework workflows, delivery and P&amp;L reports, and attendance from a fingerprint device.</p>
+      <div class="kpis"><div><b class="mono">1,046</b><span>tests</span></div><div><b class="mono">158</b><span>endpoints</span></div><div><b class="mono">84</b><span>migrations</span></div></div></div></article>
+    <article class="pc"><div class="b"><h3>Weekly BIM dashboards</h3><p>CityWalk Verve 4, Palm Jebel Ali, The Wilds and Bluewaters. Built from MIDP trackers, issue reports, model checks, clash exports, 4D video and site photos, and presented in client meetings.</p><div class="chips"><span>MIDP</span><span>4D / 5D</span><span>Clash curve</span><span>Model health</span></div></div></article>
+    <article class="pc"><div class="b"><h3>Palm 3D clash platform</h3><p>LOD 400 models of 10 villa types with their clashes, in the browser. A Navisworks exporter I wrote feeds a GLB pipeline into a Three.js viewer in the client portal.</p><div class="chips"><span>Three.js</span><span>TypeScript</span><span>Navisworks API</span></div></div></article>
+  </div>
+</section>
+
+<section id="research">
+  <div class="sh rv"><div><div class="label">08 · AI R&amp;D</div><h2>Computer vision &amp; research</h2></div></div>
+  <div class="rlist rv">
+    <div class="ri"><h4>DeskWatch</h4><p>Office occupancy from IP cameras with YOLOv9: a zone per seat, desk time and phone use, and no video stored.</p><span>YOLOv9 · OpenCV</span></div>
+    <div class="ri"><h4>Reality capture: build vs buy</h4><p>Briefed management on OpenSpace's SLAM, relocalisation and voice AI, then prototyped a voice-to-task pipeline.</p><span>Whisper · FastAPI</span></div>
+    <div class="ri"><h4>Drawing knowledge base</h4><p>Parsed 44 consultant DXF drawings (3,134 items) so the AI can check models against them.</p><span>DXF · Python</span></div>
+    <div class="ri"><h4>Springer publication</h4><p>"Potato Leaf Disease Detection Using Enhanced YOLO", <i>Studies in Systems, Decision and Control</i>, 2026.</p><span>Research</span></div>
+  </div>
+</section>
+
+<div class="contact rv" id="contact">
+  <div><div class="label">Contact</div><h2 style="margin-top:12px">Let's talk.</h2><p class="muted" style="margin-top:14px;max-width:40ch">AI engineer and BIM software developer at First Engineering Services. B.Sc. Computer Engineering, Excellent with Honors (2026). Based in Cairo, delivering for UAE projects.</p></div>
+  <div class="cl">
+    <div><span>Email</span><span><span id="em">mziad9832@gmail.com</span><button class="copy" data-copy="em" type="button">copy</button></span></div>
+    <div><span>Phone</span><span><span id="ph">+20 100 576 1013</span><button class="copy" data-copy="ph" type="button">copy</button></span></div>
+    <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/ziad-alboghdadi-692694207" target="_blank" rel="noopener">ziad-alboghdadi</a></div>
+    <div><span>GitHub</span><a href="https://github.com/ZiAd-MoHaMeD-4" target="_blank" rel="noopener">ZiAd-MoHaMeD-4</a></div>
+  </div>
+</div>
+<footer><span>© 2026 Ziad Alboghdadi</span><span>Revit · Python · C# · AI</span></footer>
+</div>
+
+<a class="totop" id="totop" href="#top" aria-label="Back to top">↑</a>
+<div id="modal" hidden><button class="btn x" type="button" id="mx">Close</button><button class="mnav prev" type="button" id="mprev" aria-label="Previous image">‹</button><button class="mnav next" type="button" id="mnext" aria-label="Next image">›</button><div class="box" id="mbox"></div></div>
+
+<script>
+(function(){
+  const c=document.getElementById('bim'), x=c.getContext('2d'), lvl=document.getElementById('lvl'), cnt=document.getElementById('cnt');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const E=[], P=[], H=0.9, N=4;
+  const plan=[[-3,-2],[3,-2],[3,0.5],[0.6,0.5],[0.6,2.2],[-3,2.2]];
+  for(let k=0;k<=N;k++){const y=k*H;for(let i=0;i<plan.length;i++){const a=plan[i],b=plan[(i+1)%plan.length];E.push([[a[0],y,a[1]],[b[0],y,b[1]]]);}}
+  for(let gx=-3;gx<=3.01;gx+=1.5)for(let gz=-2;gz<=2.21;gz+=1.05){if(gx>0.6&&gz>0.5)continue;P.push([gx,gz]);for(let k=0;k<N;k++)E.push([[gx,k*H,gz],[gx,(k+1)*H,gz]]);}
+  for(let k=1;k<=N;k++)for(let gz=-2;gz<=0.6;gz+=1.05)E.push([[-3,k*H,gz],[3,k*H,gz]]);
+  let w=0,h=0;
+  function size(){const d=Math.min(2,devicePixelRatio||1);w=c.clientWidth;h=c.clientHeight;c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0)}
+  size();addEventListener('resize',size);
+  function pr(p,a){const ca=Math.cos(a),sa=Math.sin(a);const X=p[0]*ca-p[2]*sa,Z=p[0]*sa+p[2]*ca,Y=p[1]-N*H/2;const s=Math.min(w,h)/9.4;return[w/2+X*s,h/2+(Z*.5-Y)*s*.95]}
+  const t0=performance.now();
+  function line(A,B){x.beginPath();x.moveTo(A[0],A[1]);x.lineTo(B[0],B[1]);x.stroke()}
+  function draw(now){
+    const t=(now-t0)/1000,a=reduce?.7:.55+t*.12,scan=reduce?N*H*.55:((t*.55)%(N*H+.6))-.3;
+    x.clearRect(0,0,w,h);x.lineWidth=1;x.strokeStyle='rgba(120,135,160,.07)';
+    for(let g=-5;g<=5;g++){line(pr([g,0,-4],a),pr([g,0,4],a));line(pr([-5,0,g*.8],a),pr([5,0,g*.8],a))}
+    let lit=0;
+    for(const[p,q]of E){const ym=(p[1]+q[1])/2,near=Math.abs(ym-scan)<.45,below=ym<scan;
+      x.strokeStyle=near?'rgba(140,230,255,.98)':below?'rgba(227,179,65,.42)':'rgba(160,175,200,.16)';x.lineWidth=near?1.6:1;line(pr(p,a),pr(q,a));if(below)lit++}
+    if(scan>=0&&scan<=N*H){
+      for(const[gx,gz]of P){const A=pr([gx,scan,gz],a);x.fillStyle='rgba(56,214,255,.18)';x.beginPath();x.arc(A[0],A[1],8,0,7);x.fill();x.fillStyle='rgba(150,235,255,.98)';x.beginPath();x.arc(A[0],A[1],2.2,0,7);x.fill()}
+      const q=[[-3.6,scan,-2.6],[3.6,scan,-2.6],[3.6,scan,2.8],[-3.6,scan,2.8]].map(p=>pr(p,a));
+      x.fillStyle='rgba(56,214,255,.07)';x.strokeStyle='rgba(56,214,255,.55)';x.lineWidth=1;x.beginPath();q.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.closePath();x.fill();x.stroke()}
+    lvl.textContent='L0'+Math.max(0,Math.min(N,Math.floor(scan/H)));cnt.textContent=Math.round(lit*37.3).toLocaleString();
+    if(!reduce)requestAnimationFrame(draw)}
+  requestAnimationFrame(draw);
+})();
+
+const CASES=[
+ {k:"Ceiling RCP",in:"Shop drawing Ceiling shop drawing + IFC RCP + RFI heights",time:"Sheets ready the next day",client:"Aldar · The Wilds · 3 Bed Type 01",t:"False-ceiling RCP shop drawings, end to end",d:"Produced the SD-FC reflected ceiling plans and details for submission straight from the interior model through the FirstAI bridge.",
+  n:[["24/24","ceilings applied from the shop drawing"],["89","shadow-gap families placed, plus 112 shadow lines"],["66/80","RCP dimensions generated from model geometry"],["11","real model sections replaced 18 CAD details"],["148","rows in the final verification report"]],
+  img:[]},
+ {k:"Cassia 1",in:"Apply the consultant's 12 mm joint rule to Cassia 1",time:"1 day · 440 cuts",client:"Aldar · The Wilds · Cassia 1 boundary walls",t:"Expansion joints across the whole Cassia 1 cluster",d:"The first large write job through the MCP. Every boundary-wall beam got a 12 mm joint, including curved beams, which needed arc support added to the engine.",
+  n:[["301","cuts in 289 straight CB/TB1 beams"],["139","cuts in 118 curved TB2 beams"],["±0.1","mm tolerance on every 12 mm gap"],["586","reference marks in 125 GA plans"],["136","sheets updated with a levels legend"]],
+  img:[]},
+ {k:"Cassia 2",in:"MAA comments 4 & 5 + RFI level tables",time:"Comments 4 & 5 closed in under a week",client:"Aldar · The Wilds · Cassia 2 boundary walls",t:"Consultant comments closed in the model",d:"Closed the MAA comments on joints and typical sections, raised the TB1 beams to the section E-E rule, and audited every level against the RFI tables.",
+  n:[["213","beams split for 12 mm joints, 3 copings realigned to the TB1 axis"],["17","coping levels caught wrong (13 sat 63–69 mm low)"],["538","section marks across 90 villa plans"],["212","TB1 beams raised 131–369 mm, 106 walls trimmed"],["199","wall and beam marks filled"]],
+  img:[]},
+ {k:"Cassia 4",in:"Study the master plan and check the model",time:"1 day · 107 villas",client:"Aldar · The Wilds · Cassia 4 · 107 villas",t:"Master-plan study and model review",d:"Matched the DXF master plan to both boundary-wall tables, corrected levels and sheet numbering, and issued a plot-by-plot model review.",
+  n:[["107","villas matched 100% to the master plan"],["51","side-wall copings found on the wrong villa level"],["102","copings + 359 column tops re-levelled in one run"],["1,791","elements re-levelled in total (copings, columns, BF1, BF2, TB1, TB2)"],["494→8","level differences reduced to 8 action items"]],
+  img:[]},
+ {k:"4BR stair",in:"Consultant email: 21-riser stair",time:"2 days · 3 models",client:"Aldar · The Wilds · 4-bedroom villa",t:"New first-floor level across three models",d:"Moved L01 to +3.920 for a 21-riser stair and carried the change through the architectural, structural and interior models, then issued the updated drawings.",
+  n:[["386","element offsets changed"],["26","sills and wall heights adjusted"],["17","level annotations updated"],["6","PDFs issued"]],
+  img:[]},
+ {k:"Palm Jebel Ali",in:"Consultant comments (Code B) + an IFC detail sheet",time:"Each sheet issued same day",client:"Dubai Holding · GINCO · AtkinsRéalis",t:"Comments, CAD conversion and tiling",d:"Turned consultant PDFs into registers, reviewed resubmissions automatically, rebuilt CAD details as native Revit, and produced floor-finish sheets.",
+  n:[["2,589","markups extracted from 47 PDFs"],["443","comments paired with the next revision"],["11","CAD details rebuilt as native views"],["81","annotation operations on the tiling sheet"],["72%","match to the team's sheet, up from 48%"]],
+  img:[]},
+ {k:"Bluewaters",in:"CSCEC Navisworks clash report, Tower 1",time:"v1.0 in 5 days",client:"Meraas / DHRE · CSCEC · Tower 1",t:"Clash resolution at scale",d:"FE.ClashFix, a Revit 2024 add-in that reads the Navisworks report, applies fix rules and writes a change register for the contractor.",
+  n:[["10,197","clashes parsed from the Navisworks report"],["~5,000","clashes resolved in the model"],["~50%","of the clash report closed"],["7","fix rules across 2 releases"]],
+  img:[]},
+];
+const LOG=[
+ ["The Wilds · Cassia 2","Boundary walls · MAA comments",[
+  ["Expansion joints (comment 5)","107 CB + 106 TB1 split at the double columns, 12 mm gaps","213 beams"],
+  ["Coping alignment","Copings realigned onto their TB1 axis during the joint work","3 copings",1],
+  ["Coping level audit","Every coping checked against both RFI level tables; 13 found 63–69 mm low from the wrong neighbour GFFL","17 copings",1],
+  ["Footing & beam level audit","BF2 and TB2 checked against the tables; 27 conflicts between the two tables flagged","21 errors"],
+  ["Typical sections (comment 4)","6 model sections A-A to F-F replace the CAD detail, with dims, levels and tags from the model","6 sections"],
+  ["Section reference marks","Placed in every villa plan, F-F only at street-end villas, clear of dimensions","538 marks"],
+  ["WALL MARK / REMARK","Side-yard walls and backyard TB2 filled from the comment tables, verified one by one","199 elements"],
+  ["TB1 raise to section E-E","TB1 bottoms set 500 above footing; walls trimmed to the beam top","212 beams · 106 walls"],
+  ["TB2 backyard joints","Same 12 mm joint rule applied to the backyard TB2","93 cuts"],
+  ["Sheet renumbering","Dynamo + Python: villa → plot map renames and retitles the whole package","full sheet set"],
+  ["Text find/replace","All text notes and dimension overrides on every sheet, with a preview mode","all sheets"]]],
+ ["The Wilds · Cassia 1","Boundary walls · 126 villas",[
+  ["Expansion joints, straight beams","Joint plan computed from columns, executed through FirstAI","301 cuts"],
+  ["Expansion joints, curved TB2","Arc geometry support added to the engine, then applied","139 cuts"],
+  ["Gap verification","Every new gap measured after the run","12.0 ±0.1 mm"],
+  ["Typical sections","6 sections cut on the end villa and placed on the sheet","6 sections"],
+  ["Section reference marks","All GA plans, kept ≥ 700 mm clear of dimensions","586 marks"],
+  ["Legend cloud","'MISSING SIKKA LEVELS' cloud drawn on every sheet whose title block has a legend","136 sheets"]]],
+ ["The Wilds · Cassia 4","Boundary walls · 107 villas",[
+  ["Master plan from DXF","Plots, gates and levels read and matched to both Excel tables","107 villas · 100%"],
+  ["Model inventory","Sheets, views, links and host structure listed","111 · 430 · 215"],
+  ["Coping level check","Side-wall copings found set to the lower villa's GFFL","51 copings",1],
+  ["Coping re-level","Copings and the column tops under them moved to the table level in one run","102 copings · 359 cols",1],
+  ["BF1 / TB1 / TB2 / BF2 re-level","Footings, beams and the columns under them set to the table levels","1,330 elements"],
+  ["Sheet set renamed","Setting-out sheets renumbered to the package scheme with views","107 sheets"],
+  ["Model review report","Plot-by-plot diagrams and an issue list sent for review","494 → 8 items"],
+  ["Playbook","Rules from Cassia 1 and 2 captured so the next cluster starts faster","reusable"]]],
+ ["The Wilds · Villas","Ceiling RCP · 4BR stair",[
+  ["Ceilings from the shop drawing","Heights and types applied from the SD and RFI","24 ceilings"],
+  ["Shadow gaps","Families placed and shadow lines drawn","89 families · 112 lines"],
+  ["RCP graphics","Fill patterns, view filters, legend, tags","4 · 5 · 31"],
+  ["RCP dimensions","Built from model geometry; off-model points reported","66 / 80"],
+  ["SD-FC details","DXF details rebuilt, then replaced by real model sections on 4 sheets","18 → 11 sections"],
+  ["4BR stair level change","L01 to +3.920 across AR, ST and ID models with a full before/after check","386 offsets · 3 models"],
+  ["Follow-up fixes","Window sills, unconnected wall heights, level texts","43 elements"],
+  ["Issue package","Updated sheets exported and the review email drafted","6 PDFs"]]],
+ ["Palm Jebel Ali","Dubai Holding · GINCO",[
+  ["Comment register","Consultant PDF markups extracted to Excel","2,589 markups · 47 PDFs"],
+  ["Villa K action register","Comments turned into tracked actions","681 actions"],
+  ["Resubmission review","Each comment checked against the resubmitted sheets","107 comments"],
+  ["Comment vs next revision","Each comment paired with the next sheet revision automatically","443 pairs"],
+  ["IFC value extraction","Values traced to source, conflicts flagged","334 values · 51 conflicts"],
+  ["Wet-room generator","Bathroom shop drawing generated from the model","48% → 72% match"],
+  ["CAD → Revit (Villa O)","DWG details rebuilt as native views on a team-format sheet","11 views · 1 sheet"],
+  ["Floor tiling (Villa P)","Tile types, pattern alignment in 6 rooms, drains moved","6 rooms · 5 drains"],
+  ["Floor-finish sheet","Tags, FFL spots, setting-out points, dims, schedule, legend","81 annotations"],
+  ["Wall stiffeners","Blockwork spans over 4 m found and stiffeners placed (BIMStudio)","whole model"]]],
+ ["Sections & dimensions","Drawing production",[
+  ["Typical sections","A-A to F-F cut on the right villa on Cassia 1 and 2, annotated from the model","12 sections"],
+  ["Ceiling sections","SD-FC A–K at 1:5, with the shop-drawing detail fitted onto the model cut","11 sections"],
+  ["Section reference marks","Placed in every villa plan, kept clear of dims","1,124 marks"],
+  ["RCP dimensions","From model faces; off-model points reported, not faked","66 dims"],
+  ["Tile setting-out dims","Chains, grid-to-drain dims, FFL spots, setting-out points","81 annotations"],
+  ["Sheets in team format","Title block, revision, viewport titles, schedule, legend","issue-ready"]]],
+ ["Revit families","Generation · nested · placement",[
+  ["Family from ERP spec","Parameters, types, formulas, materials, solids and voids built into a real .rfa","Revit 2022–2026"],
+  ["Parametric opening families","Reference planes, locked and EQ dims, void and visible solid, flex-tested","4 families"],
+  ["Family inspection","Parameters, formulas and visibility read from loaded families","any family"],
+  ["Nested components","Vanity and drain positions read through their nested families","per room"],
+  ["Bulk placement","Shadow-gap families, stiffener columns and openings placed from rules","89+ instances"]]],
+ ["AutoCAD → Revit","Conversion pipeline",[
+  ["DWG to DXF, batch","AutoCAD core console, no manual export","any DWG"],
+  ["Detail extraction","One detail per paper viewport, with title, scale and notes","11 + 18 details"],
+  ["Standards mapping","Layers, lineweights, greys, patterns, text and dim styles mapped to the model","per project"],
+  ["Native rebuild","Lines, filled regions, text and live dimensions, with no linked CAD","0 failures"],
+  ["Sheet in team format","Title block data, revision and titles, then PDF","same day"],
+  ["Master plan georeference","DXF fitted to the model on 107 gates for level checks","±0.1 m"]]],
+ ["Bluewaters · CityWalk · Dashboards","Meraas / DHRE · CSCEC",[
+  ["Navisworks report parsing","Tower 1 clash report turned into element-level data","10,197 clashes"],
+  ["Federated clash scan","All interior models scanned with fix / skip / check rules","all ID models"],
+  ["Automatic clash fixes","Floor, ceiling, shadow-gap and wall rules applied","~5,000 resolved"],
+  ["Change register","Every fix logged for the contractor","1 register"],
+  ["Weekly BIM dashboards","Rebuilt from trackers, issue reports, clash exports and 4D","4 projects"],
+  ["MEP progress update","Excel tracker pushed into the Wilds dashboard by script","1 click"],
+  ["Villa walkthrough renders","Blender pipeline builds videos from specs and shop drawings","per villa"],
+  ["Document renaming","Batch renamer for transmittal files with preview and undo","any batch"]]],
+];
+document.getElementById('alog').innerHTML=LOG.map(g=>`<article class="lg"><header><h4>${g[0]}</h4><span>${g[1]} · ${g[2].length} tasks</span></header><ol>${g[2].map(r=>`<li class="${r[3]?'cp':''}"><b>${r[0]}</b><em>${r[2]}</em><p>${r[1]}</p></li>`).join("")}</ol></article>`).join("");
+const tabs=document.getElementById('tabs'),cs=document.getElementById('case');
+function showCase(i){const c=CASES[i];
+  tabs.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-selected',j===i));
+  const right=c.img.length?`<div class="gallery">${c.img.map((m,j)=>`<figure class="ph ${j===0?'big':'sm'}" data-src="img/${m[0]}.webp" data-cap="${m[1]}"><img src="img/${m[0]}.webp" alt="${m[1]}"><figcaption>${m[1]}</figcaption></figure>`).join("")}</div>`
+    :`<div class="bigstats">${c.n.map(n=>`<div><b class="mono">${n[0]}</b><span>${n[1]}</span></div>`).join("")}</div>`;
+  cs.innerHTML=`<div><div class="client">${c.client}</div><h3>${c.t}</h3><div class="badges"><div class="bdg"><em>Task in</em>${c.in}</div><div class="bdg fast"><em>Turnaround</em><strong>${c.time}</strong></div></div><p class="d">${c.d}</p>${c.img.length?`<ul>${c.n.map(n=>`<li><b>${n[0]}</b><span>${n[1]}</span></li>`).join("")}</ul>`:''}</div><div>${right}</div>`}
+tabs.innerHTML=CASES.map((c,i)=>`<button role="tab" type="button" aria-selected="${i===0}">${c.k}</button>`).join("");
+tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(b)showCase([...tabs.children].indexOf(b))});
+showCase(0);
+
+const A=[
+ ["Sheets","Batch NWC from ACC","batch_nwc","Exports NWC for many models straight from ACC, without opening them in Revit.",["ACC + local + workshared","per shared site","all NWC settings","saved profiles"]],
+ ["Sheets","Sheet Exporter","sheet_exporter","Batch PDF and DWG export with smart file naming.",["PDF + DWG","names from parameters","saved profiles","combined PDF"]],
+ ["Sheets","Sheet Replicator","sheet_replicator","Copies a full sheet set to another level in one click.",["rebuilds every view","copies chosen detailing","rename rules"]],
+ ["Sheets","Sheet Import","sheet_import","Turns an Excel sheet into a native Revit table.",["keeps text + shading","new sheet","no linked Excel"]],
+ ["Sheets","Export Views","export_views","Exports views to PDF and schedules to CSV in one run.",["views → PDF","schedules → CSV","combine PDFs"]],
+ ["Sheets","Schedule to Excel","schedule_sync","Edit a Revit schedule in Excel and push it back.",["export","edit in Excel","sync back by ID"]],
+ ["Sheets","Batch Rename","batch_rename","Renames elements, views, sheets and parameters in bulk.",["find / replace","prefix + suffix","preview","one Undo"]],
+ ["Model health","Warning Resolver","warning_resolver","Fixes model warnings automatically and safely.",["20 warning types","each fix verified","auto-undo on fail","move limit"]],
+ ["Model health","Fix Join Warnings","fix_join_warns","Cleans up join warnings across the model.",["unjoin false joins","re-join touching","tolerances","report"]],
+ ["Model health","Model Checker","model_checker","Colours the model to spot mistakes at a glance.",["by level","by category","by host","click to isolate"]],
+ ["Model health","Link Reload","link_reload","Reloads nested links without closing the model.",["link tree diagnosis","all worksets","keeps view settings"]],
+ ["Model health","Door & CW Sections","door_sections","A section for every door and curtain wall, on sheets.",["auto crop + name","sheet layout","elevations too"]],
+ ["Model health","Door Check","!door_check","Checks every door opening against frame and tolerance.",["rough opening","tolerance in mm","fails in red"]],
+ ["Walls & floors","Split Wall Layers","split_wall_layers","Splits compound walls into one wall per layer.",["keeps hosted doors","keeps tags + dims","per wall type"]],
+ ["Walls & floors","Adjust Wall Levels","adjust_wall_levels","Snaps walls to the concrete in the structural link.",["base to slab top","top to soffit","through voids"]],
+ ["Walls & floors","Split STR With Walls","split_str_walls","Cuts walls where linked concrete passes through.",["columns + RC walls","no double quantities","preview"]],
+ ["Walls & floors","Join STR With Walls","join_str_walls","Cuts wall openings where linked concrete sits.",["beams, slabs, columns","re-runnable","preview"]],
+ ["Walls & floors","Wall Stiffeners","wall_stiffeners","Places stiffener columns on long blockwork spans.",["spans > 4 m","even or set spacing","review first"]],
+ ["Walls & floors","Split Skirting","!split_skirting","Turns stacked walls into wall plus skirting.",["wall sweep skirting","correct schedules"]],
+ ["Walls & floors","Split Floor Layers","!split_floor","Splits floors into structure, screed and finish.",["per layer group","deviation report"]],
+ ["Structure","PC Slab","pc_slab","Places a PC slab under every footing, dimensioned.",["auto outline","dims","edge-column shift","updates in place"]],
+ ["Structure","Join Geometry","join_geometry","Joins everything by a category priority matrix.",["join order fixed","project / view / selection","saved matrices"]],
+ ["Structure","Column · Foundation · Plan Dims","!dims","Automatic dimensions for columns, footings and plans.",["column to grid","rotated footings","exterior chains"]],
+ ["Annotation","Tag All","tag_all","Tags every untagged element in the view.",["per category","model's usual tag","leaders + offset"]],
+ ["Annotation","Align Tags","align_tags","12 tools to line up and untangle tags.",["align + distribute","stack in rows","untangle leaders"]],
+ ["Rooms & MEP","Room & Tiling Studio","room_tiling","Room sheets, tile setting-out and wet-area drawings.",["room packages","tile quantities","wet-area sheets","one click"]],
+ ["Rooms & MEP","BWIC Openings","bwic_openings","Creates and places MEP openings in walls and slabs.",["model + links","sized + merged","tagged","own families"]],
+ ["Rooms & MEP","Clash Resolver","clash_resolver","Finds clashes and reroutes MEP around them.",["Navisworks XML","pipes, ducts, trays","auto bends","re-checked"]],
+ ["Data","Asset Schedule","asset_schedule","Fills the client's asset register from the model.",["client template","NRM1 codes","IFC GUIDs","gap report"]],
+ ["Data","Asset Information","asset_information","Creates and fills the client's asset parameters.",["client parameters","auto fill","preview mode"]],
+ ["Data","Project Analytics","project_analytics","Shows who worked on what, and for how long.",["time per user","element stats","charts"]],
+ ["Data","Family Studio","family_studio","Builds Revit families from the company library.",["ERP sign-in","build .rfa","upload back"]],
+ ["Data","Aldar Assets · WILDS LOIN","!wildsloin","Aldar's asset data workflow on its own ribbon tab.",["LOIN parameters","Uniclass + NRM1","asset schedule","P6 task IDs"]],
+ ["Data","Licence & sign-in","00_signin","Protects the suite with a machine-bound licence.",["RSA-signed","domain bound","obfuscated build"]],
+];
+function chips(a){return `<div class="chp">${a[4].map(c=>`<i>${c}</i>`).join('')}</div>`}
+function isIcon(a){return a[2].startsWith('!')}
+function note(a){return a[1].includes('Dims')?'Runs straight from the selection':a[1].includes('LOIN')?'Separate Aldar ribbon tab':'Opens on architectural models'}
+function thumb(a){return isIcon(a)?`<div class="im none"><img src="img/ic_${a[2].slice(1)}.png" alt="${a[1]} ribbon icon"><span>${note(a)}</span></div>`:`<div class="im"><img src="img/ui_${a[2]}.webp" alt="${a[1]} in Revit" loading="lazy"></div>`}
+const FEAT=["Batch NWC from ACC","Room & Tiling Studio","BWIC Openings","Clash Resolver","Warning Resolver","Sheet Exporter","Sheet Replicator","Model Checker","Fix Join Warnings","Asset Schedule","Asset Information","Project Analytics","Aldar Assets · WILDS LOIN"];
+const ag=document.getElementById('agrid'),fl=document.getElementById('filters');
+document.getElementById('ftgrid').innerHTML=FEAT.map(n=>A.findIndex(a=>a[1]===n)).filter(i=>i>=0).map(i=>{const a=A[i];return `<button class="ac" type="button" data-i="${i}">${thumb(a)}<div class="t"><span>${a[0]}</span><h4>${a[1]}</h4><p>${a[3]}</p>${chips(a)}</div></button>`}).join("");
+const groups=["All",...new Set(A.map(a=>a[0]))];
+fl.innerHTML=groups.map((g,i)=>`<button type="button" aria-pressed="${i===0}">${g}</button>`).join("");
+function renderA(g){ag.innerHTML=A.map((a,i)=>[a,i]).filter(([a])=>g==="All"?!FEAT.includes(a[1]):a[0]===g).map(([a,i])=>
+  `<button class="ac" type="button" data-i="${i}">${thumb(a)}<div class="t"><span>${a[0]}</span><h4>${a[1]}</h4><p>${a[3]}</p>${chips(a)}</div></button>`).join("")}
+fl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fl.querySelectorAll('button').forEach(z=>z.setAttribute('aria-pressed',z===b));renderA(b.textContent)});
+renderA("All");
+
+const M=document.getElementById('modal'),mb=document.getElementById('mbox');
+document.addEventListener('click',e=>{
+  const ac=e.target.closest('.ac');if(ac){const a=A[+ac.dataset.i];mb.className="box";
+    mb.innerHTML=`<div class="mimg">${isIcon(a)?`<div style="text-align:center"><img src="img/ic_${a[2].slice(1)}.png" alt="" style="width:72px;height:72px;background:none"><p class="mono muted" style="margin-top:10px;font-size:.8rem">${note(a)}</p></div>`:`<img src="img/ui_${a[2]}.webp" alt="${a[1]}">`}</div><div class="mtx"><div class="label">${a[0]}</div><h3>${a[1]}</h3><p>${a[3]}</p>${chips(a)}<p class="mono" style="font-size:.75rem;color:var(--fg-3)">BIMStudio · Revit 2026 · C# .NET 8</p></div>`;M.hidden=false;return}
+  const ph=e.target.closest('.ph[data-src]');if(ph){mb.className="box img";mb.innerHTML=`<div class="mimg"><img src="${ph.dataset.src}" alt="${ph.dataset.cap||''}"></div><div class="mtx" style="padding:14px 20px"><p>${ph.dataset.cap||''}</p></div>`;M.hidden=false;return}
+  if(e.target.id==='mx'||e.target===M)M.hidden=true;
+  const cp=e.target.closest('.copy');if(cp){const el=document.getElementById(cp.dataset.copy);
+    try{navigator.clipboard.writeText(el.textContent).then(()=>{cp.textContent="copied";setTimeout(()=>cp.textContent="copy",1400)},()=>{const r=document.createRange();r.selectNode(el);getSelection().removeAllRanges();getSelection().addRange(r)})}catch(_){}}
+});
+addEventListener('keydown',e=>{if(e.key==='Escape')M.hidden=true});
+
+if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');io.unobserve(en.target)}}),{threshold:.05});
+  document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('pre');io.observe(el)}});
+}
+
+/* ---------- interactive layer ---------- */
+(function(){
+  const links=[...document.querySelectorAll('nav .links a[href^="#"]')];
+  const map=links.map(a=>[a,document.querySelector(a.getAttribute('href'))]).filter(x=>x[1]);
+  const bar=document.getElementById('progress'), top=document.getElementById('totop');
+  function onScroll(){
+    const h=document.documentElement, max=h.scrollHeight-innerHeight;
+    bar.style.width=(max>0?scrollY/max*100:0)+'%';
+    top.classList.toggle('show',scrollY>innerHeight*.8);
+    let cur=null; for(const [a,sec] of map){ if(sec.getBoundingClientRect().top<innerHeight*.35) cur=a; }
+    links.forEach(a=>a.classList.toggle('on',a===cur));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  const menu=document.querySelector('nav .menu'), ln=document.getElementById('links');
+  menu.addEventListener('click',()=>{const o=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!o));ln.classList.toggle('open',!o)});
+  ln.addEventListener('click',e=>{if(e.target.closest('a')){ln.classList.remove('open');menu.setAttribute('aria-expanded','false')}});
+
+  /* counters: the final numbers are already in the markup; animate only when motion is allowed */
+  const nums=[...document.querySelectorAll('[data-count]')];
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    const fmt=(v,el)=>Math.round(v).toLocaleString('en-US')+(el.dataset.suffix||'');
+    const io=new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting) return; io.unobserve(en.target);
+      const el=en.target, end=+el.dataset.count, t0=performance.now(), d=1300;
+      (function step(t){const k=Math.min(1,(t-t0)/d), e=1-Math.pow(1-k,3); el.textContent=fmt(end*e,el); if(k<1) requestAnimationFrame(step); else el.textContent=fmt(end,el)})(t0);
+    }),{threshold:.6});
+    nums.forEach(n=>io.observe(n));
+  }
+
+  /* gallery navigation inside the modal */
+  const M=document.getElementById('modal'), mb=document.getElementById('mbox'), prev=document.getElementById('mprev'), next=document.getElementById('mnext');
+  let list=[], idx=-1;
+  function show(i){ idx=(i+list.length)%list.length; const el=list[idx];
+    mb.className="box img"; mb.innerHTML=`<div class="mimg"><img src="${el.dataset.src}" alt="${el.dataset.cap||''}"></div><div class="mtx" style="padding:14px 20px"><p>${el.dataset.cap||''} <span class="mono muted" style="font-size:.75rem">· ${idx+1} / ${list.length}</span></p></div>`;
+    M.hidden=false; prev.hidden=next.hidden=list.length<2; }
+  document.addEventListener('click',e=>{
+    const ph=e.target.closest('.ph[data-src]');
+    if(ph){ e.stopImmediatePropagation(); list=[...document.querySelectorAll('.ph[data-src]')]; show(list.indexOf(ph)); return; }
+    if(e.target.closest('.ac')){ prev.hidden=next.hidden=true; }
+  },true);
+  prev.addEventListener('click',e=>{e.stopPropagation(); if(list.length) show(idx-1)});
+  next.addEventListener('click',e=>{e.stopPropagation(); if(list.length) show(idx+1)});
+  addEventListener('keydown',e=>{ if(M.hidden||!list.length||!mb.classList.contains('img')) return;
+    if(e.key==='ArrowLeft') show(idx-1); if(e.key==='ArrowRight') show(idx+1); });
+  new MutationObserver(()=>{ if(M.hidden){ prev.hidden=next.hidden=true; } }).observe(M,{attributes:true,attributeFilter:['hidden']});
+  prev.hidden=next.hidden=true;
+
+  /* tabs: open a project from the address, e.g. #work-cassia-1 */
+  const tabs=document.getElementById('tabs');
+  if(tabs){ const slug=t=>'work-'+t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-$/,'');
+    const btns=[...tabs.querySelectorAll('button')];
+    const h=location.hash.slice(1); const hit=btns.find(b=>slug(b.textContent)===h); if(hit){hit.click(); document.getElementById('work').scrollIntoView();}
+  }
+})();
+</script>
+
+</body>
+</html>
