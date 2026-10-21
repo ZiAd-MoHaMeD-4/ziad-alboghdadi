@@ -367,6 +367,7 @@ nav .menu{display:none;margin-left:auto;font-family:var(--m);font-size:.78rem;ba
   .ac,.wc,.panel,.dc,.fc,.pc,.lg{transition:transform .25s,box-shadow .25s,border-color .25s}
   .dc:hover,.fc:hover,.pc:hover,.lg:hover{transform:translateY(-3px);box-shadow:0 22px 50px -26px rgba(56,214,255,.45)}
 }
+#filters small{opacity:.55;font-size:.7rem;margin-left:4px}
 
 .cad{grid-template-columns:minmax(0,1fr)!important}
 .pc.wide{grid-template-columns:minmax(0,1fr)!important}
@@ -568,7 +569,7 @@ nav .menu{display:none;margin-left:auto;font-family:var(--m);font-size:.78rem;ba
 </section>
 
 <section id="addins">
-  <div class="sh rv"><div><div class="label">06 · Revit add-ins</div><h2>BIMStudio suite</h2></div><p>45 commands on the company's own Revit tab, used by the BIM team. C# on .NET 8, with a signed, machine-bound licence. Every screenshot is from Revit 2026.</p></div>
+  <div class="sh rv"><div><div class="label">06 · Revit add-ins</div><h2>BIMStudio suite</h2></div><p>45 tools in 8 categories on the company's own Revit tab, used by the BIM team and documented in the company ERP. C# on .NET 8, with a signed, machine-bound licence. Every screenshot is from Revit 2026.</p></div>
   <div class="ribbon rv"><div class="scroll"><img src="img/ribbon.webp" alt="First Engineering ribbon tab in Revit 2026" width="1864" height="94"></div><div class="scroll panels"><img src="img/ribbon_panels.webp" alt="Expanded panels: MEP Coordination, Asset Data, Wall Tools, Floor Tools, Room and Tiling, Family Studio" width="960" height="127"></div></div>
   <div class="fthead"><h3>Flagship tools</h3><span class="mono muted">click any tool for details</span></div>
   <div class="ftgrid" id="ftgrid"></div>
@@ -762,53 +763,66 @@ tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(b)showCa
 showCase(0);
 
 const A=[
- ["Sheets","Batch NWC from ACC","batch_nwc","Exports NWC for many models straight from ACC, without opening them in Revit.",["ACC + local + workshared","per shared site","all NWC settings","saved profiles"]],
- ["Sheets","Sheet Exporter","sheet_exporter","Batch PDF and DWG export with smart file naming.",["PDF + DWG","names from parameters","saved profiles","combined PDF"]],
- ["Sheets","Sheet Replicator","sheet_replicator","Copies a full sheet set to another level in one click.",["rebuilds every view","copies chosen detailing","rename rules"]],
- ["Sheets","Sheet Import","sheet_import","Turns an Excel sheet into a native Revit table.",["keeps text + shading","new sheet","no linked Excel"]],
- ["Sheets","Export Views","export_views","Exports views to PDF and schedules to CSV in one run.",["views → PDF","schedules → CSV","combine PDFs"]],
- ["Sheets","Schedule to Excel","schedule_sync","Edit a Revit schedule in Excel and push it back.",["export","edit in Excel","sync back by ID"]],
- ["Sheets","Batch Rename","batch_rename","Renames elements, views, sheets and parameters in bulk.",["find / replace","prefix + suffix","preview","one Undo"]],
- ["Model health","Warning Resolver","warning_resolver","Fixes model warnings automatically and safely.",["20 warning types","each fix verified","auto-undo on fail","move limit"]],
- ["Model health","Fix Join Warnings","fix_join_warns","Cleans up join warnings across the model.",["unjoin false joins","re-join touching","tolerances","report"]],
- ["Model health","Model Checker","model_checker","Colours the model to spot mistakes at a glance.",["by level","by category","by host","click to isolate"]],
- ["Model health","Link Reload","link_reload","Reloads nested links without closing the model.",["link tree diagnosis","all worksets","keeps view settings"]],
- ["Model health","Door & CW Sections","door_sections","A section for every door and curtain wall, on sheets.",["auto crop + name","sheet layout","elevations too"]],
- ["Model health","Door Check","!door_check","Checks every door opening against frame and tolerance.",["rough opening","tolerance in mm","fails in red"]],
- ["Walls & floors","Split Wall Layers","split_wall_layers","Splits compound walls into one wall per layer.",["keeps hosted doors","keeps tags + dims","per wall type"]],
- ["Walls & floors","Adjust Wall Levels","adjust_wall_levels","Snaps walls to the concrete in the structural link.",["base to slab top","top to soffit","through voids"]],
- ["Walls & floors","Split STR With Walls","split_str_walls","Cuts walls where linked concrete passes through.",["columns + RC walls","no double quantities","preview"]],
- ["Walls & floors","Join STR With Walls","join_str_walls","Cuts wall openings where linked concrete sits.",["beams, slabs, columns","re-runnable","preview"]],
- ["Walls & floors","Wall Stiffeners","wall_stiffeners","Places stiffener columns on long blockwork spans.",["spans > 4 m","even or set spacing","review first"]],
- ["Walls & floors","Split Skirting","!split_skirting","Turns stacked walls into wall plus skirting.",["wall sweep skirting","correct schedules"]],
- ["Walls & floors","Split Floor Layers","!split_floor","Splits floors into structure, screed and finish.",["per layer group","deviation report"]],
- ["Structure","PC Slab","pc_slab","Places a PC slab under every footing, dimensioned.",["auto outline","dims","edge-column shift","updates in place"]],
- ["Structure","Join Geometry","join_geometry","Joins everything by a category priority matrix.",["join order fixed","project / view / selection","saved matrices"]],
- ["Structure","Column · Foundation · Plan Dims","!dims","Automatic dimensions for columns, footings and plans.",["column to grid","rotated footings","exterior chains"]],
- ["Annotation","Tag All","tag_all","Tags every untagged element in the view.",["per category","model's usual tag","leaders + offset"]],
- ["Annotation","Align Tags","align_tags","12 tools to line up and untangle tags.",["align + distribute","stack in rows","untangle leaders"]],
- ["Rooms & MEP","Room & Tiling Studio","room_tiling","Room sheets, tile setting-out and wet-area drawings.",["room packages","tile quantities","wet-area sheets","one click"]],
- ["Rooms & MEP","BWIC Openings","bwic_openings","Creates and places MEP openings in walls and slabs.",["model + links","sized + merged","tagged","own families"]],
- ["Rooms & MEP","Clash Resolver","clash_resolver","Finds clashes and reroutes MEP around them.",["Navisworks XML","pipes, ducts, trays","auto bends","re-checked"]],
- ["Data","Asset Schedule","asset_schedule","Fills the client's asset register from the model.",["client template","NRM1 codes","IFC GUIDs","gap report"]],
- ["Data","Asset Information","asset_information","Creates and fills the client's asset parameters.",["client parameters","auto fill","preview mode"]],
- ["Data","Project Analytics","project_analytics","Shows who worked on what, and for how long.",["time per user","element stats","charts"]],
- ["Data","Family Studio","family_studio","Builds Revit families from the company library.",["ERP sign-in","build .rfa","upload back"]],
- ["Data","Aldar Assets · WILDS LOIN","!wildsloin","Aldar's asset data workflow on its own ribbon tab.",["LOIN parameters","Uniclass + NRM1","asset schedule","P6 task IDs"]],
- ["Data","Licence & sign-in","00_signin","Protects the suite with a machine-bound licence.",["RSA-signed","domain bound","obfuscated build"]],
+ ["Coordination & Navisworks","Batch NWC from ACC","batch_nwc","Exports NWC for many models straight from ACC, without opening them in Revit.",["ACC + local + workshared","per shared site","all NWC settings","saved profiles"]],
+ ["Coordination & Navisworks","Clash Resolver","clash_resolver","Finds clashes and reroutes MEP around them.",["Navisworks XML","pipes, ducts, trays","auto bends","re-checked"]],
+ ["Coordination & Navisworks","Clash Report for Revit","!clashexport","Turns Clash Detective results into the XML Clash Resolver reads, plus an Excel clash register.",["both element IDs","grid + level","company register"],"Runs inside Navisworks"],
+ ["Coordination & Navisworks","Switch Back","!switchback","Jumps from a clash in Navisworks to the same element in Revit, boxed and zoomed.",["ID + model check","section box","both elements"],"Runs inside Navisworks"],
+ ["Coordination & Navisworks","Fix Clashes","!fixclashes","Clears same-model clashes with the right join order, shadow gaps and openings.",["7 join rules","shadow gaps","CW floor openings"],"Runs on the open model"],
+ ["Coordination & Navisworks","BWIC Openings","bwic_openings","Creates and places MEP openings in walls and slabs.",["model + links","sized + merged","tagged","own families"]],
+ ["Coordination & Navisworks","Link Reload","link_reload","Reloads nested links without closing the model.",["link tree diagnosis","all worksets","keeps view settings"]],
+ ["Sheets & Documentation","Sheet Exporter","sheet_exporter","Batch PDF and DWG export with smart file naming.",["PDF + DWG","names from parameters","saved profiles","combined PDF"]],
+ ["Sheets & Documentation","Sheet Replicator","sheet_replicator","Copies a full sheet set to another level in one click.",["rebuilds every view","copies chosen detailing","rename rules"]],
+ ["Sheets & Documentation","Sheet Import","sheet_import","Turns an Excel sheet into a native Revit table.",["keeps text + shading","new sheet","no linked Excel"]],
+ ["Sheets & Documentation","Export Views","export_views","Exports views to PDF and schedules to CSV in one run.",["views → PDF","schedules → CSV","combine PDFs"]],
+ ["Sheets & Documentation","Schedule to Excel","schedule_sync","Edit a Revit schedule in Excel and push it back.",["export","edit in Excel","sync back by ID"]],
+ ["Sheets & Documentation","Door & CW Sections","door_sections","A section for every door and curtain wall, on sheets.",["auto crop + name","sheet layout","elevations too"]],
+ ["Interiors & Fit-out","Room Package","room_tiling","Plan, RCP, four elevations and a sheet for every room you pick.",["cropped to the room","your templates","sheet laid out"]],
+ ["Interiors & Fit-out","Tile Setting-out","room_tiling","Tile grid, start point, cuts and quantities per room.",["fewest cuts / least waste","cut pieces shaded","order quantity"]],
+ ["Interiors & Fit-out","Wet Area Drawings","room_tiling","Full wet-area shop drawing set for each bathroom.",["tiling plan","tiled elevations + 3D","tags, dims, sheet"]],
+ ["QA & Model Health","Warning Resolver","warning_resolver","Fixes model warnings automatically and safely.",["20 warning types","each fix verified","auto-undo on fail","move limit"]],
+ ["QA & Model Health","Fix Join Warnings","fix_join_warns","Cleans up join warnings across the model.",["unjoin false joins","re-join touching","tolerances","report"]],
+ ["QA & Model Health","Model Checker","model_checker","Colours the model to spot mistakes at a glance.",["by level","by category","by host","click to isolate"]],
+ ["QA & Model Health","Door Check","!door_check","Checks every door opening against frame and tolerance.",["rough opening","tolerance in mm","fails in red"],"Opens on architectural models"],
+ ["QA & Model Health","Project Analytics","project_analytics","Shows who worked on what, and for how long.",["time per user","element stats","charts"]],
+ ["Modelling","Split Wall Layers","split_wall_layers","Splits compound walls into one wall per layer.",["keeps hosted doors","keeps tags + dims","per wall type"]],
+ ["Modelling","Adjust Wall Levels","adjust_wall_levels","Snaps walls to the concrete in the structural link.",["base to slab top","top to soffit","through voids"]],
+ ["Modelling","Split STR With Walls","split_str_walls","Cuts walls where linked concrete passes through.",["columns + RC walls","no double quantities","preview"]],
+ ["Modelling","Join STR With Walls","join_str_walls","Cuts wall openings where linked concrete sits.",["beams, slabs, columns","re-runnable","preview"]],
+ ["Modelling","Wall Stiffeners","wall_stiffeners","Places stiffener columns on long blockwork spans.",["spans > 4 m","even or set spacing","review first"]],
+ ["Modelling","Split Skirting","!split_skirting","Turns stacked walls into wall plus skirting.",["wall sweep skirting","correct schedules"],"Opens on architectural models"],
+ ["Modelling","Split Floor Layers","!split_floor","Splits floors into structure, screed and finish.",["per layer group","deviation report"],"Opens on architectural models"],
+ ["Modelling","PC Slab","pc_slab","Places a PC slab under every footing, dimensioned.",["auto outline","dims","edge-column shift","updates in place"]],
+ ["Modelling","Join Geometry","join_geometry","Joins everything by a category priority matrix.",["join order fixed","project / view / selection","saved matrices"]],
+ ["Dimensions & Annotation","Column Dims","!coldims","Ties every column and wall to the nearest grid.",["near + far faces","both grid directions","linked models"],"Runs straight from the selection"],
+ ["Dimensions & Annotation","Foundation Dims","!founddims","Length and width on every footing, rotated ones included.",["true size","own side faces","one click"],"Runs straight from the selection"],
+ ["Dimensions & Annotation","Plan Dims","!plandims","Running dimension chains along every wall line of a plan.",["office standard","jambs + partitions","exterior outward"],"Runs on the active plan"],
+ ["Dimensions & Annotation","Tag All","tag_all","Tags every untagged element in the view.",["per category","model's usual tag","leaders + offset"]],
+ ["Dimensions & Annotation","Align Tags","align_tags","12 tools to line up and untangle tags.",["align + distribute","stack in rows","untangle leaders"]],
+ ["Dimensions & Annotation","Batch Rename","batch_rename","Renames elements, views, sheets and parameters in bulk.",["find / replace","prefix + suffix","preview","one Undo"]],
+ ["Asset Data","Asset Schedule","asset_schedule","Fills the client's asset register from the model.",["client template","NRM1 codes","IFC GUIDs","gap report"]],
+ ["Asset Data","Asset Information","asset_information","Creates and fills the client's asset parameters.",["client parameters","auto fill","preview mode"]],
+ ["Asset Data","WILDS LOIN","!wildsloin","Fills Aldar's LOIN parameters on The Wilds models, previewed first.",["Uniclass + NRM","sizes + names","P6 task IDs"],"Separate Aldar ribbon tab"],
+ ["Asset Data","Aldar Parameters","!wildsloin","Step 1: creates the Aldar and COBie shared parameters from the LOIN matrix.",["Type / Instance","safe to re-run"],"Separate Aldar ribbon tab"],
+ ["Asset Data","Aldar Export Mapping","!wildsloin","Step 2: one Excel row per element type for Uniclass, NRM1 and movability.",["NRM1 suggested","merges, never overwrites"],"Separate Aldar ribbon tab"],
+ ["Asset Data","Aldar Fill & Schedule","!wildsloin","Step 3: writes the asset data and exports the asset schedule with a gap report.",["Uniclass + COBie","gap report","preview mode"],"Separate Aldar ribbon tab"],
+ ["Asset Data","Aldar Dynamo Scripts","!wildsloin","The same three steps as Dynamo Player scripts, for PCs without the add-in.",["Dynamo Player","no packages"],"Dynamo Player"],
+ ["Families","Build from Studio","family_studio","Picks a family from the ERP library, builds the .rfa and uploads it back.",["ERP sign-in","build .rfa","upload back"]],
+ ["Families","Build from File","family_studio","Builds a family from a downloaded spec file, no sign-in needed.",["spec file","formulas checked","right template"]],
+ ["Suite","Licence & sign-in","00_signin","Protects the suite with a machine-bound licence.",["RSA-signed","domain bound","obfuscated build"]],
 ];
 function chips(a){return `<div class="chp">${a[4].map(c=>`<i>${c}</i>`).join('')}</div>`}
 function isIcon(a){return a[2].startsWith('!')}
-function note(a){return a[1].includes('Dims')?'Runs straight from the selection':a[1].includes('LOIN')?'Separate Aldar ribbon tab':'Opens on architectural models'}
+function note(a){return a[5]||''}
 function thumb(a){return isIcon(a)?`<div class="im none"><img src="img/ic_${a[2].slice(1)}.png" alt="${a[1]} ribbon icon"><span>${note(a)}</span></div>`:`<div class="im"><img src="img/ui_${a[2]}.webp" alt="${a[1]} in Revit" loading="lazy"></div>`}
-const FEAT=["Batch NWC from ACC","Room & Tiling Studio","BWIC Openings","Clash Resolver","Warning Resolver","Sheet Exporter","Sheet Replicator","Model Checker","Fix Join Warnings","Asset Schedule","Asset Information","Project Analytics","Aldar Assets · WILDS LOIN"];
+const FEAT=["Batch NWC from ACC","Room Package","Wet Area Drawings","BWIC Openings","Clash Resolver","Warning Resolver","Sheet Exporter","Sheet Replicator","Model Checker","Fix Join Warnings","Asset Schedule","Asset Information","Project Analytics","WILDS LOIN"];
 const ag=document.getElementById('agrid'),fl=document.getElementById('filters');
 document.getElementById('ftgrid').innerHTML=FEAT.map(n=>A.findIndex(a=>a[1]===n)).filter(i=>i>=0).map(i=>{const a=A[i];return `<button class="ac" type="button" data-i="${i}">${thumb(a)}<div class="t"><span>${a[0]}</span><h4>${a[1]}</h4><p>${a[3]}</p>${chips(a)}</div></button>`}).join("");
 const groups=["All",...new Set(A.map(a=>a[0]))];
-fl.innerHTML=groups.map((g,i)=>`<button type="button" aria-pressed="${i===0}">${g}</button>`).join("");
+const cnt=g=>g==="All"?A.filter(a=>a[0]!=="Suite").length:A.filter(a=>a[0]===g).length;
+fl.innerHTML=groups.map((g,i)=>`<button type="button" aria-pressed="${i===0}" data-g="${g}">${g} <small class="mono">${cnt(g)}</small></button>`).join("");
 function renderA(g){ag.innerHTML=A.map((a,i)=>[a,i]).filter(([a])=>g==="All"?!FEAT.includes(a[1]):a[0]===g).map(([a,i])=>
   `<button class="ac" type="button" data-i="${i}">${thumb(a)}<div class="t"><span>${a[0]}</span><h4>${a[1]}</h4><p>${a[3]}</p>${chips(a)}</div></button>`).join("")}
-fl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fl.querySelectorAll('button').forEach(z=>z.setAttribute('aria-pressed',z===b));renderA(b.textContent)});
+fl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fl.querySelectorAll('button').forEach(z=>z.setAttribute('aria-pressed',z===b));renderA(b.dataset.g)});
 renderA("All");
 
 const M=document.getElementById('modal'),mb=document.getElementById('mbox');
